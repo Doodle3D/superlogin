@@ -305,6 +305,32 @@ describe('User Model', function() {
       });
   });
 
+  it('should update roles when refreshing a session', function() {
+    var newRole = 'newrole';
+    var emitterPromise = new BPromise(function(resolve) {
+      emitter.once('refresh', function(session) {
+        expect(session.roles).to.include(newRole);
+        resolve();
+      });
+    });
+
+    return previous
+      .then(function() {
+        return userDB.get('superuser');
+      })
+      .then(function(userDoc) {
+        userDoc.roles.push(newRole);
+        return userDB.put(userDoc);
+      })
+      .then(function() {
+        return user.refreshSession(sessionKey, sessionPass);
+      })
+      .then(function(result) {
+        expect(result.roles).to.include(newRole);
+        return emitterPromise;
+      });
+  });
+
   it('should log out of a session', function() {
     var emitterPromise = new BPromise(function(resolve) {
       emitter.once('logout', function(user_id) {
