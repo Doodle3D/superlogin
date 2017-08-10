@@ -15,6 +15,10 @@ module.exports = {
     usernameField: 'username',
     passwordField: 'password'
   },
+  oauth: {
+    template: path.join(__dirname, '../templates/oauth/auth-callback.ejs'),
+    templateTest: path.join(__dirname, '../templates/oauth/auth-callback-test.ejs')
+  },
   session: {
     adapter: 'memory',
     file: {
