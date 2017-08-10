@@ -16,7 +16,12 @@
             window.opener.superlogin.oauthSession(error, session, link);
         }
     }
-    window.close();
+
+    try {
+        window.location.assign('doodle3d_transform://token' + window.location.hash);
+    } catch (e) {
+        window.close();
+    }
 </script>
 </body>
 </html>
