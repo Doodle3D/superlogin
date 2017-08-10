@@ -31,7 +31,9 @@
                 if (value) queryArray.push(key + '=' + value);
             }
             var query = queryArray.join('&');
-            window.location.assign('doodle3dtransform://token?' + query);
+            setTimeout(function() {
+              window.location.assign('doodle3dtransform://token?' + query);
+            }, 500);
         } catch (e) {
             document.write(e);
         } finally {
