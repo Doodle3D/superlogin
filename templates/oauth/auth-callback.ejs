@@ -7,32 +7,38 @@
 </head>
 <body>
 <script type="text/javascript">
-    var session = <%- JSON.stringify(session) %>;
-    var error = <%- JSON.stringify(error) %>;
-    var link = <%- JSON.stringify(link) %>;
-
-    if (window.opener) {
-        window.opener.focus();
-        if (window.opener.superlogin && window.opener.superlogin.oauthSession) {
-            window.opener.superlogin.oauthSession(error, session, link);
-        }
-    }
-
     try {
-        var queryData = {
-            session: session,
-            error: error,
-            link: link
-        };
-        var queryArray = [];
-        for (key in queryData) {
-            var value = queryData[key];
-            if (value) queryArray.push(key + '=' + value);
+        var session = <%- JSON.stringify(session) %>;
+        var error = <%- JSON.stringify(error) %>;
+        var link = <%- JSON.stringify(link) %>;
+
+        if (window.opener) {
+            window.opener.focus();
+            if (window.opener.superlogin && window.opener.superlogin.oauthSession) {
+                window.opener.superlogin.oauthSession(error, session, link);
+            }
         }
-        var query = queryArray.join('&');
-        window.location.assign('doodle3dtransform://token?' + query);
-    } finally {
-        window.close();
+
+        try {
+            var queryData = {
+                session: session,
+                error: error,
+                link: link
+            };
+            var queryArray = [];
+            for (key in queryData) {
+                var value = queryData[key];
+                if (value) queryArray.push(key + '=' + value);
+            }
+            var query = queryArray.join('&');
+            window.location.assign('doodle3dtransform://token?' + query);
+        } catch (e) {
+            document.write(e);
+        } finally {
+            window.close();
+        }
+    } catch (e) {
+      document.write(e);
     }
 </script>
 </body>
