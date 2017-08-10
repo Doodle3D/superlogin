@@ -26,12 +26,12 @@
         };
         var queryArray = [];
         for (key in queryData) {
-          var value = queryData[key];
-          queryArray.push(key + '=' + value);
+            var value = queryData[key];
+            if (value) queryArray.push(key + '=' + value);
         }
         var query = queryArray.join('&');
         window.location.assign('doodle3dtransform://token?' + query);
-    } catch (e) {
+    } finally {
         window.close();
     }
 </script>
