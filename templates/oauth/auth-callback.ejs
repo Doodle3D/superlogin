@@ -7,18 +7,30 @@
 </head>
 <body>
 <script type="text/javascript">
+    var session = <%- JSON.stringify(session) %>;
+    var error = <%- JSON.stringify(error) %>;
+    var link = <%- JSON.stringify(link) %>;
+
     if (window.opener) {
         window.opener.focus();
-        var session = <%- JSON.stringify(session) %>;
-        var error = <%- JSON.stringify(error) %>;
-        var link = <%- JSON.stringify(link) %>;
         if (window.opener.superlogin && window.opener.superlogin.oauthSession) {
             window.opener.superlogin.oauthSession(error, session, link);
         }
     }
 
     try {
-        window.location.assign('doodle3dtransform://token' + window.location.hash);
+        var queryData = {
+            session: session,
+            error: error,
+            link: link
+        };
+        var queryArray = [];
+        for (key in queryData) {
+          var value = queryData[key];
+          queryArray.push(key + '=' + value);
+        }
+        var query = queryArray.join('&');
+        window.location.assign('doodle3dtransform://token?' + query);
     } catch (e) {
         window.close();
     }
