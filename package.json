@@ -1,6 +1,6 @@
 {
   "name": "@doodle3d/superlogin",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Powerful authentication for APIs and single page apps using the CouchDB ecosystem which supports a variety of providers.",
   "main": "./lib/index.js",
   "repository": {
@@ -43,7 +43,7 @@
     "nodemailer-stub-transport": "^1.0.0",
     "passport": "^0.3.2",
     "passport-http-bearer-sl": "^1.0.1",
-    "passport-local": "^1.0.0",
+    "passport-local": "github:Doodle3D/passport-local",
     "pouchdb": "~6.3.4",
     "pouchdb-seed-design": "^0.2.0",
     "redis": "^2.5.2",
